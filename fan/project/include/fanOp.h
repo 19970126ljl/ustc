@@ -1,3 +1,7 @@
+void initialize();
+
+void release();
+
 //append print_str to filename
 void output_data(char *filename, char *print_str);
 
@@ -19,7 +23,7 @@ int getBoardUtilization(unsigned Id);
 //get the number of cores
 int getCoreNum(int boardId);
 //get each core's utilization
-int* getCoreUtilization(unsigned boardId);
+void getCoreUtilization(unsigned boardId,int a[]);
 
 //get theboard tmperature
 int getBoardTemperature(int boardId);
@@ -27,6 +31,6 @@ int getBoardTemperature(int boardId);
 //get cluster num
 int getClusterNum(int boardId);
 //get cluster temperature
-int *getClusterTemperature(int boardId);
+void getClusterTemperature(int boardId,int a[]);
 //get process infomation
 cndevProcessInfo_t *processInfo();
