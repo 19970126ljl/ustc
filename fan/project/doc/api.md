@@ -3,9 +3,15 @@
 
 使用以下接口要包含头文件 **../include/fanOp.h**并链接 **../lib/fanlib.so** **../lib/libcndev.so** 
 
+//初始化
 
-*使用接口前首先调用* ```cndevCheckErrors(cndevInit(CNDEV_VERSION_4))```
-*接口使用完毕后调用* ```cndevRelease()```
+```void initialize();```
+
+//结束释放
+
+
+```void release();```
+
 
 //把字符串print_str添加到文件filename末尾
 
@@ -37,7 +43,7 @@
 
 //获取核心利用率，返回一个数组，每个元素对应一个核心的利用率，参数boardId为板卡号
 
-```int* getCoreUtilization(unsigned boardId);```
+```void getCoreUtilization(unsigned boardId,int a[]);```
 
 //获取板卡温度，参数boardId为板卡号
 
@@ -49,7 +55,7 @@
 
 //获取核心温度，返回一个数组，每个元素对应一个核心的温度，参数boardId为板卡号
 
-```int *getClusterTemperature(int boardId);```
+```void getClusterTemperature(int boardId,int a[]);```
 
 //获取板卡上进程的使用情况
 

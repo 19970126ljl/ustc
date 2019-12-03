@@ -1,6 +1,13 @@
 #include<stdio.h>
 #include<errno.h>
-#include<cndev.h>
+#include "../include/cndev.h"
+
+void initialize(){
+        cndevCheckErrors(cndevInit(CNDEV_VERSION_4));
+}
+void release(){
+        cndevRelease();
+}
 void output_data(char *filename, char *print_str)
 {
     FILE* out;
@@ -69,7 +76,7 @@ int getCoreNum(int boardId){
     cndevCheckErrors(cndevGetCoreCount(&cardCoreCount,boardId));
     return cardCoreCount.count;
 }
-int* getCoreUtilization(unsigned boardId){
+void getCoreUtilization(unsigned boardId,int a[]){
     cndevUtilizationInfo_t utilInfo;
     utilInfo.version = CNDEV_VERSION_3;
     cndevCheckErrors(cndevGetDeviceUtilizationInfo(&utilInfo,boardId));
@@ -78,9 +85,7 @@ int* getCoreUtilization(unsigned boardId){
     cndevCheckErrors(cndevGetCoreCount(&cardCoreCount,boardId));
     //for (int i = 0; i < cardCoreCount.count; i++) 
     //    printf("Util CORE%d:%d\n",i,utilInfo.CoreUtilization[i]);
-    int *a = (int*)malloc(sizeof(int)*cardCoreCount.count);
     for(int i = 0;i<cardCoreCount.count;i++) a[i] = utilInfo.CoreUtilization[i];
-    return a;
 }
 
 int getBoardTemperature(int boardId){
@@ -101,7 +106,7 @@ int getClusterNum(int boardId){
     return cardClusterCount.count;
 }
 
-int *getClusterTemperature(int boardId){
+void getClusterTemperature(int boardId,int a[]){
     cndevTemperatureInfo_t tempInfo;
     tempInfo.version = CNDEV_VERSION_3;
     cndevCheckErrors(cndevGetTemperatureInfo(&tempInfo,boardId));
@@ -111,10 +116,8 @@ int *getClusterTemperature(int boardId){
     //printf("Clusters:");
     //for (int i = 0; i < cardClusterCount.count; i++) 
     //    printf("%dC ", tempInfo.Cluster[i]);
-    int *a = (int*)malloc(sizeof(int)*cardClusterCount.count);
     for(int i = 0;i<cardClusterCount.count;i++) a[i] = tempInfo.Cluster[i];
     //printf("\n");
-    return a;
 }
 
 cndevProcessInfo_t *processInfo(){
