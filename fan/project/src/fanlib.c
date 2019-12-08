@@ -120,6 +120,20 @@ void getClusterTemperature(int boardId,int a[]){
     //printf("\n");
 }
 
+int getBoardFreq(int boardId){
+	cndevFrequencyInfo_t freqInfo;
+	freqInfo.version = CNDEV_VERSION_3;
+    cndevCheckErrors(cndevGetFrequencyInfo(&freqInfo, boardId));
+    return freqInfo.Frequency;
+}
+
+int getBoardPowerUsage(int boardId){
+    cndevPowerInfo_t powerInfo;
+    powerInfo.version = CNDEV_VERSION_3;
+    cndevCheckErrors(cndevGetPowerInfo(&powerInfo, boardId));
+    return powerInfo.Usage;
+}
+
 cndevProcessInfo_t *processInfo(){
     unsigned tCount = 10;
     cndevRet_t ret;

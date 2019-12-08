@@ -1,3 +1,4 @@
+
 void initialize();
 
 void release();
@@ -32,5 +33,13 @@ int getBoardTemperature(int boardId);
 int getClusterNum(int boardId);
 //get cluster temperature
 void getClusterTemperature(int boardId,int a[]);
+
+//get the board frequency
+int getBoardFreq(int boardId);
+
+//get the board power usage
+int getBoardPowerUsage(int boardId);
+
+
 //get process infomation
 cndevProcessInfo_t *processInfo();
